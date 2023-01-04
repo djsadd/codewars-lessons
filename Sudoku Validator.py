@@ -33,27 +33,4 @@ class Sudoku(object):
         for r in range(block_row, block_row + self.block_len):
             for c in range(block_column, block_column + self.block_len):
                 block_set.add(self.data[r][c])
-        return self._is_valid_set(block_set)
-
-    def _is_valid_set(self, num_set):
-        return len(num_set) == self.n \
-               and max(num_set) == self.n \
-               and min(num_set) == 1 \
-               and all(type(i) is int for i in num_set)
-
-
-# Valid Sudoku
-goodSudoku1 = Sudoku([
-    [7, 8, 4, 1, 5, 9, 3, 2, 6],
-    [5, 3, 9, 6, 7, 2, 8, 4, 1],
-    [6, 1, 2, 4, 3, 8, 7, 5, 9],
-
-    [9, 2, 8, 7, 1, 5, 4, 6, 3],
-    [3, 5, 7, 8, 4, 6, 1, 9, 2],
-    [4, 6, 1, 9, 2, 3, 5, 8, 7],
-
-    [8, 7, 6, 3, 9, 4, 2, 1, 5],
-    [2, 4, 3, 5, 6, 1, 9, 7, 8],
-    [1, 9, 5, 2, 8, 7, 6, 3, 4]
-])
-print(goodSudoku1.is_valid())
+        return len(block_set) == 9
