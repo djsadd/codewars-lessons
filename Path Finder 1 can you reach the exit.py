@@ -1,18 +1,75 @@
 def path_finder(maze):
-    lst_maze = maze.split()
     x, y = 0, 0
-    end_x, end_y = len(lst_maze)-1, len(lst_maze)-1
+    stack = [(0, 0)]
 
-    for row in lst_maze:
-        print(row)
+    lst_maze = list(map(list, maze.splitlines()))
 
-    return True
+    while len(stack):
+        if lst_maze[-1][-1] == 'x':
+            return True
+        x, y = stack.pop()
+        if lst_maze[x][y] == '.':
+            lst_maze[x][y] = 'x'
+            for dx, dy in [(x, y-1), (x, y+1), (x-1, y), (x+1, y)]:
+                if 0 <= dx < len(lst_maze) and 0 <= dy < len(lst_maze) and lst_maze[dx][dy] == '.':
+                    stack.append((dx, dy))
+    return lst_maze[-1][-1] == 'x'
 
 
-a = "\n".join([
-          ".W...",
-          ".W...",
-          ".W.W.",
-          "...W.",
-          "...W."])
-print(path_finder(a))
+
+class test:
+    @staticmethod
+    def assert_equals(path, value):
+
+        if path == value:
+            return True
+        else:
+            raise ValueError
+
+
+def it_1():
+    a = "\n".join([
+        ".W...",
+        ".W...",
+        ".W.W.",
+        "...W.",
+        "...W."])
+    test.assert_equals(path_finder(a), True)
+
+    a = "\n".join([
+        ".W...",
+        ".W...",
+        ".W.W.",
+        "...WW",
+        "...W."])
+    test.assert_equals(path_finder(a), False)
+
+    a = "\n".join([
+        "..W",
+        ".W.",
+        "W.."])
+    test.assert_equals(path_finder(a), False)
+
+    a = "\n".join([
+        ".WWWW",
+        ".W...",
+        ".W.W.",
+        ".W.W.",
+        "...W."])
+    test.assert_equals(path_finder(a), True)
+
+    a = "\n".join([
+        ".W...",
+        "W....",
+        ".....",
+        ".....",
+        "....."])
+    test.assert_equals(path_finder(a), False)
+
+    a = "\n".join([
+        ".W",
+        "W."])
+    test.assert_equals(path_finder(a), False)
+
+
+it_1()
