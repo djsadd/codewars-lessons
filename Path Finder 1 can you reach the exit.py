@@ -1,3 +1,6 @@
+from tests_codewars import test
+
+
 def path_finder(maze):
     x, y = 0, 0
     stack = [(0, 0)]
@@ -15,16 +18,7 @@ def path_finder(maze):
                     stack.append((dx, dy))
     return lst_maze[-1][-1] == 'x'
 
-
-
-class test:
-    @staticmethod
-    def assert_equals(path, value):
-
-        if path == value:
-            return True
-        else:
-            raise ValueError
+# tests
 
 
 def it_1():
