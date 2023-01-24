@@ -4,7 +4,6 @@ class VigenereCipher(object):
         self.alphabet = alphabet
 
     def encode(self, text):
-        password = self.get_str(text)
 
         word = ''
 
@@ -12,39 +11,20 @@ class VigenereCipher(object):
             if text[i] not in self.alphabet:
                 word += text[i]
                 continue
-            three = self.alphabet.find(text[i]) + self.alphabet.find(password[i])
+            three = self.alphabet.find(text[i]) + self.alphabet.find(self.key[i % len(self.key)])
 
             word += self.alphabet[three % len(self.alphabet)]
         return word
 
     def decode(self, text):
-        password = self.get_str(text)
         word = ''
         for i in range(len(text)):
             if text[i] not in self.alphabet:
                 word += text[i]
                 continue
-            word += self.alphabet[(self.alphabet.find(text[i])-self.alphabet.find(password[i])) % len(self.alphabet)]
+            word += self.alphabet[(self.alphabet.find(text[i])-self.alphabet.find(self.key[i % len(self.key)])) % len(self.alphabet)]
 
         return word
-
-    def get_str(self, text):
-        password = ''
-        i = 0
-        k = 0
-        while len(text) != len(password):
-            if k > len(self.key) - 1:
-                k = 0
-
-            if text[i] in self.alphabet:
-                password += self.key[k]
-                k += 1
-                i += 1
-            else:
-                password += text[i]
-                i += 1
-                k += 1
-        return password
 
 
 alphabet = 'abcdefghijklmnopqrstuvwxyz'
