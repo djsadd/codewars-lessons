@@ -18,6 +18,21 @@ def path_finder(maze):
                     stack.append((dx, dy))
     return lst_maze[-1][-1] == 'x'
 
+# def path_finder(maze):
+#     g = maze.splitlines()
+#     end, bag = len(g[0]) -1 + len(g) * 1j - 1j, {0}
+#     grid = set()
+#     for y, l in enumerate(g):
+#         for x, c in enumerate(l):
+#             if '.' == c:
+#                 grid.add(x+y*1j)
+#
+#     while bag:
+#         if end in bag:
+#             return True
+#         grid -= bag
+#         bag = grid & set.union(*({z + 1j ** k for k in range(4)} for z in bag))
+#     return False
 # tests
 
 

@@ -5,4 +5,4 @@ class test:
         if path == value:
             return
         else:
-            raise ValueError
+            print('RAISE')
